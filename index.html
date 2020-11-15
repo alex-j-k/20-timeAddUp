@@ -195,13 +195,33 @@
     console.log(minSec);
 
 // map over minSec THEN destructuring and split on : into minuets and seconds, THEN turn to NUMS
-    const timeString = minSec.map(timecode => {
+    const seconds = minSec.map(timecode => {
         const [mins, secs] = timecode.split(':').map(parseFloat);
-       return (mins * 60) + secs;
-       console.log(mins, secs)
+        return (mins * 60) + secs;
     })
-
+      .reduce((acc, cur) => acc + cur)
    
+// diveide % 17000 seconds by 3600(one hours of seconds)
+console.log('total seconds all up: ' +seconds);
+
+let hours = Math.floor(seconds/3600);
+console.log('total hours: '+ hours);
+let secondsLeftAfterHours = seconds % 3600;
+console.log('total seconds left after hours: ' +secondsLeftAfterHours);
+
+let minutes = Math.floor(secondsLeftAfterHours / 60);
+console.log('total mins: ' +minutes);
+let finalSecondsLeft = Math.floor(minutes % 60);
+console.log( 'and ' + finalSecondsLeft + ' seconds');
+
+let finalTotal  = `${hours}:${minutes}:${finalSecondsLeft}`;
+console.log(finalTotal)
+
+  
+
+
+
+
 </script>
 </body>
 </html>
